@@ -1,7 +1,4 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-npm init react-app my-app
-cd my-app
-npm start
 
 // npm test
 //npm run build
