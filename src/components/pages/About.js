@@ -6,7 +6,7 @@ const About = () => {
             <div className="container text-center mt-4">
             <h1>About</h1>
             <p>App to Search Github users</p>
-            <p>Verison: 1.0.0</p>
+            <p>Version: 1.0.0</p>
             </div>
             
         </Fragment>

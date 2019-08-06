@@ -1,10 +1,13 @@
 import React, { Fragment } from 'react';
-import spinner from './spinner.gif';
 
 const Spinner = () => {
     return (
         <Fragment>
-            <img src={spinner} alt="Loading..." style={{width: '200px', margin: 'auto', display: 'block'}} />
+<div class="d-flex justify-content-center mt-4 ">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
         </Fragment>
     )
 }

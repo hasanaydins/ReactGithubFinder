@@ -7,12 +7,11 @@ import styled from 'styled-components';
 const UserItem = ({user: {followers,login, avatar_url}}) => {
 
         return ( <Card>
-                <div className="card text-center justify-content-center">
+                <div  className="card text-center justify-content-center">
                 <img src={avatar_url} alt="" className="rounded-circle border mx-auto mt-3 mb-3" style={{width: '70px' }} />
-                <h4>@{login}</h4>
+                <h4>{login}</h4>
                 <div>
-                    <Link to={`/user/${login}`}  className="btn btn-dark btn-sm my-1 mb-3">More</Link>
-                    
+                    <Link to={`/user/${login}`}  className="btn btn-dark btn-sm my-1 mb-3 stretched-link">More</Link>
                 </div>
             </div>
         </Card>
@@ -35,6 +34,7 @@ margin-top: 30px;
     background-color: #f3f3f3 !important;
     transition: transform .2s
 }
+
 `;
 
 export default UserItem;

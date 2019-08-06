@@ -49,15 +49,14 @@ export class User extends Component {
             {hireable ? <i className="fas fa-check text-success mt-2 ml-2" /> : <i className="fas fa-times-circle text-danger mt-2 ml-2" /> }</h5> 
 
             <div className="row">
-            
                 <div className="col-12 col-md-4">
                 <Card>
-                <div className="card">
+                <div className="card mt-2">
                 <div className="text-center">
                     <img src={avatar_url} className="rounded-circle mt-3" style={{width: '140px'}} />
-                    <h2 className="mt-2">{name}</h2>
-                    <p className="mt-0">@{login}</p>
-                    <p>Location: {location}</p>
+                    <h2 className="mt-3">{name}</h2>
+                    <p className="">@{login}</p>
+                    <p><i class="fas fa-map-marker-alt"></i>   {location}</p>
                 </div>
                 <div className="mx-3">
                     {bio && (<Fragment>
@@ -67,45 +66,53 @@ export class User extends Component {
                     )}
                     <a href={html_url} className="btn btn-dark my-1">Visit Github Profile</a>
                     <ul className="my-3">
-                        <li>
+                        
                             {company && <Fragment>
-                                <strong>Company: </strong> {company}
+                                <li><strong>Company: </strong> {company}</li>
+                                
                             </Fragment>}
-                        </li>
-                        <li>
+                        
                         {blog && <Fragment>
-                                <strong>Website: </strong> {blog}
+                            <li><strong>Website:  </strong><a href={blog} > {blog}</a></li>
+                            
                             </Fragment>}
-                        </li>
                     </ul>
                 </div>
             </div>
+            <div className="card mt-3">
+          <div className="card-body text-center">
+          <h5 className="border border-secondary rounded p-2">Followers: <span class="badge badge-primary">{followers}</span></h5>
+
+             <h5 className="border border-secondary rounded p-2">Following: <span class="badge badge-success">{following}</span></h5>
+
+
+            <h5 className="border border-secondary rounded p-2">Public Gists: <span class="badge badge-warning">{public_repos}</span></h5>
+             <h5 className="border border-secondary rounded p-2">Public Repos: <span class="badge badge-danger">{public_gists}</span></h5>
+
+    
+          
+
+             </div>
+
+             </div>
             </Card>
               </div>
             
             
              <div className="col-12 col-md-8">
              <Card>
-             <div className="card">
-          <div className="card-body text-center">
-             <a href={`https://github.com/${login}?tab=followers`} role="button" className="btn btn-info m-2">
-             Followers: <span className="badge badge-light">{followers}</span>
-             </a>
-             <a href={`https://github.com/${login}?tab=following`} role="button" className="btn btn-success m-2">
-             Following: <span className="badge badge-light">{following}</span>
-             </a>
-             <a href={`https://github.com/${login}?tab=repositories`} role="button" className="btn btn-dark m-2">
-             Public Repos: <span className="badge badge-light">{public_repos}</span>
-             </a>
-             <a href={`https://gist.github.com/${login}`} role="button" className="btn btn-danger m-2">
-             Public Gists: <span className="badge badge-light">{public_gists} </span>
-             </a>
+
+             <div className="card mt-2"> 
+             <div className="card-body mt-2">
+             <h2 className="m-2">Repositories</h2>
+             <Repos repos={repos} />
+             <a href={`https://github.com/${login}?tab=repositories`} role="button" className="btn btn-secondary  btn-block mt-2 ">More </a>
+             </div>
+             
 
              </div>
-             <Repos repos={repos} />
-             </div>
              </Card>
-          
+
              </div>                
             </div>
         </Fragment>;
@@ -122,6 +129,7 @@ const Card = styled.div`
     box-shadow: 0 5px 16px 0 rgba(86, 54, 255, 0.1 );
     background-color: #f3f3f3 !important;
     transition: transform .2s;
+    
 }
 `;
 
