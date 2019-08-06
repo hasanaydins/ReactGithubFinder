@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
 
 export class Search extends Component {
     state = {
@@ -28,15 +30,35 @@ export class Search extends Component {
     render() {
         return (
             <div className="container mt-4" onSubmit={this.onSubmit}>
-                <form className="from">
-                    <input className="form-control" type="text" name="text" placeholder="Search User.." value={this.state.text} onChange={this.onChange} />
-                        <input type="submit" value="Search" className="btn btn-dark btn-block mt-3" />
-                </form>
-                {this.props.showClear && <button className="btn btn-light btn-block mt-2" onClick={this.props.clearUsers}>Clear All</button>}
+                <Card>
+                    <div className="card">
+                        <div className="card-body">
+                        <form className="form">
+                        <input className="form-control" type="text" name="text" placeholder="Search User.." value={this.state.text} onChange={this.onChange} />
+                        <input type="submit" value="Search" className="btn btn-secondary btn-block my-2" />
+                    </form>
+                    {this.props.showClear && <button className="btn btn-light btn-block mt-2 clearAll" onClick={this.props.clearUsers}>Clear All</button>}
+                
+                    </div>
+                    </div>
+                    </Card>
+                
                 
             </div>
         )
     }
 }
+
+const Card = styled.div`
+
+ .card{
+    box-shadow: 0 5px 16px 0 rgba(86, 54, 255, 0.1 );  
+},
+.btn-light{
+    background-color: #e7e7e7   ; 
+    border-radius: 5.5px;
+}
+`;
+
 
 export default Search;

@@ -2,17 +2,23 @@ import React, { Fragment, Component } from 'react';
 import Spinner from '../layout/Spinner';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import Repos from '../repos/Repos';
+import styled from 'styled-components';
+
 
 
 export class User extends Component {
     componentDidMount() {
-        this.props.getUser(this.props.match.params.login)
+        this.props.getUser(this.props.match.params.login);
+        this.props.getUserRepos(this.props.match.params.login);
     }
     static propTypes = {
         loading: PropTypes.bool.isRequired,
         user: PropTypes.object.isRequired,
-        getUser: PropTypes.func.isRequired
-    }
+        repos: PropTypes.array.isRequired,
+        getUser: PropTypes.func.isRequired,
+        getUserRepos: PropTypes.func.isRequired
+    };
     render() {
         const {
             name,
@@ -29,8 +35,8 @@ export class User extends Component {
             public_gists,
             hireable
         } = this.props.user;
-
-        const {loading} = this.props;
+ 
+        const {loading, repos} = this.props;
         
         if(loading) {
             return <Spinner/>       
@@ -39,24 +45,28 @@ export class User extends Component {
         return <Fragment>
             <Link to='/' className='btn btn-secondary mt-1'> &lt; Back to Home</Link>
             <h5 className="mt-4">Hireable:  
+        
             {hireable ? <i className="fas fa-check text-success mt-2 ml-2" /> : <i className="fas fa-times-circle text-danger mt-2 ml-2" /> }</h5> 
 
             <div className="row">
-            <div className="card col-12 col-md-4 " style={userStyle}>
+            
+                <div className="col-12 col-md-4">
+                <Card>
+                <div className="card">
                 <div className="text-center">
-                    <img src={avatar_url} className="rounded-circle mt-3" style={{width: '150px'}} />
-                    <h1>{name}</h1>
-                    <p>@{login}</p>
+                    <img src={avatar_url} className="rounded-circle mt-3" style={{width: '140px'}} />
+                    <h2 className="mt-2">{name}</h2>
+                    <p className="mt-0">@{login}</p>
                     <p>Location: {location}</p>
                 </div>
-                <div>
+                <div className="mx-3">
                     {bio && (<Fragment>
                          <h3>Bio</h3>
                          <p>{bio}</p>
                     </Fragment>
                     )}
-                    <a href={html_url} className="btn btn-dark my-1 mb-2">Visit Github Profile</a>
-                    <ul>
+                    <a href={html_url} className="btn btn-dark my-1">Visit Github Profile</a>
+                    <ul className="my-3">
                         <li>
                             {company && <Fragment>
                                 <strong>Company: </strong> {company}
@@ -70,34 +80,49 @@ export class User extends Component {
                     </ul>
                 </div>
             </div>
+            </Card>
+              </div>
+            
+            
              <div className="col-12 col-md-8">
-             
-                <div className="card mr-2">
-                <div className="card-body text-center" style={userStyle}>
-
-             <button type="button" className="btn btn-info">
+             <Card>
+             <div className="card">
+          <div className="card-body text-center">
+             <a href={`https://github.com/${login}?tab=followers`} role="button" className="btn btn-info m-2">
              Followers: <span className="badge badge-light">{followers}</span>
-             </button>
-             <button type="button" className="btn btn-success ml-2">
+             </a>
+             <a href={`https://github.com/${login}?tab=following`} role="button" className="btn btn-success m-2">
              Following: <span className="badge badge-light">{following}</span>
-             </button>
-             <button type="button" className="btn btn-dark ml-2">
+             </a>
+             <a href={`https://github.com/${login}?tab=repositories`} role="button" className="btn btn-dark m-2">
              Public Repos: <span className="badge badge-light">{public_repos}</span>
-             </button>
-             <button type="button" className="btn btn-danger ml-2  ">
-             Public Gists: <span className="badge badge-light">{public_gists}</span>
-             </button>
+             </a>
+             <a href={`https://gist.github.com/${login}`} role="button" className="btn btn-danger m-2">
+             Public Gists: <span className="badge badge-light">{public_gists} </span>
+             </a>
 
              </div>
+             <Repos repos={repos} />
              </div>
+             </Card>
+          
              </div>                
             </div>
         </Fragment>;
         
     };
 }
-const userStyle = {
-    boxShadow: '0 8px 12px 0 rgba(87, 87, 87, 0.17)',
-    backgroundColor: 'rgb(239, 239, 239)'
+const Card = styled.div`
+
+  .card:hover {
+    box-shadow: 0 5px 16px 0 rgba(86, 54, 255, 0.2 );
+    transform: scale(1.03);
+ },
+ .card{
+    box-shadow: 0 5px 16px 0 rgba(86, 54, 255, 0.1 );
+    background-color: #f3f3f3 !important;
+    transition: transform .2s;
 }
+`;
+
 export default User
