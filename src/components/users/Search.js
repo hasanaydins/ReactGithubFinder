@@ -3,36 +3,34 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 
-const Search = ({searchUsers, showClear, clearUsers}) => {
+const Search = ({searchUsers, showClear, clearUsers, showAlert}) => {
     const [text, setText] = useState('');
-    state = {
-        text: ''
-    };
+
 
 
   const  onSubmit = (e) => {
         e.preventDefault();
-        if(this.state.text === '') {
-            this.props.setAlert('Please enter something', 'secondary')
+        if(text === '') {
+            showAlert('Please enter something', 'secondary')
         } else {
-            this.props.searchUsers(this.state.text);
-            this.setState({text: ''})
+            searchUsers(text);
+            setText('');
         }
     }
-    onChange = (e) => {
+const   onChange = (e) => {
        setText(e.target.value);;
     }
 
         return (
-            <div className="container mt-4" onSubmit={this.onSubmit}>
+            <div className="container mt-4" onSubmit={onSubmit}>
                 <Card>
                     <div className="card">
                         <div className="card-body">
                         <form className="form">
-                        <input className="form-control" type="text" name="text" placeholder="Search User.." value={text} onChange={this.onChange} />
+                        <input className="form-control" type="text" name="text" placeholder="Search User.." value={text} onChange={onChange} />
                         <input type="submit" value="Search" className="btn btn-secondary btn-block my-2" />
                     </form>
-                    {this.props.showClear && <button className="btn btn-light btn-block mt-2 clearAll" onClick={this.props.clearUsers}>Clear All</button>}
+                    {showClear && <button className="btn btn-light btn-block mt-2 clearAll" onClick={clearUsers}>Clear All</button>}
                 
                     </div>
                     </div>
