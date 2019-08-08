@@ -13,9 +13,9 @@ import './App.css';
 const App = () => {
 
   const [users, setUsers] =useState([]);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({});
   const [repos, setRepos] = useState([]);
-  const [loading, setLoading] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState([]);
 
 /* // Onerilen ,lk 30 kullanıcı
@@ -43,12 +43,7 @@ const App = () => {
     setLoading(false);
     };
 
-    ///////
-    const showAlert = (msg, type) => {
-      setAlert({msg, type});
-
-      setTimeout(() =>  setAlert(null), 5000);
-    };
+   
 
     const getUser = async (username) => {
       setLoading(true);
@@ -68,7 +63,12 @@ const App = () => {
       setLoading(false);
     }
 
-    
+     ///////
+     const showAlert = (msg, type) => {
+      setAlert({ msg, type });
+
+      setTimeout(() =>  setAlert(null), 5000);
+    };
     return (
       <GithubState>
 

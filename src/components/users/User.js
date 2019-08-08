@@ -33,7 +33,7 @@ const User = ({user, loading, getUser, getUserRepos, repos, match}) => {
         } 
 
         return <Fragment>
-            <Link to='/' className='btn btn-secondary mt-1'> &lt; Back to Home</Link>
+            <Link to='/' className='btn btn-secondary mt-2 mb-1'> <i className="fas fa-backspace"></i> Back to Home</Link>
              
             {hireable === true ? (
                <h5 className="mt-4">Hireable:  <i className="fas fa-check text-success mt-2 ml-2" /></h5>
@@ -98,6 +98,7 @@ const User = ({user, loading, getUser, getUserRepos, repos, match}) => {
             </div>
         </Fragment>;
 }
+
 const Card = styled.div`
 
   .card:hover {
